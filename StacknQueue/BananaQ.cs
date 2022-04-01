@@ -16,6 +16,7 @@ namespace StacknQueue
                 rear = front;
             } else {
                 Node<T> temp = new Node<T>(data); // else, make the new node point to the rear
+                if(front == rear) front.Next = temp; // for the second node, make sure the old front node points to it. 
                 rear.Next = temp;
                 rear = temp;
             }
