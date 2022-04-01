@@ -16,15 +16,15 @@ public class MyArrayList<T>
     private int lastIndex;
     // Setup initial array with size 4
     public MyArrayList(){
-        this.backingArray = new T[4]();
+        this.backingArray = new T[4];
         this.size = 4;
         this.lastIndex = 0;
     }
     
     // Method to get element from backing array at index i
     public T GetElementAtIndex(int index){
-        if(index >= size) throw new IndexOutOfRangeException();
-        throw new NotImplementedException();
+        if(index > lastIndex) throw new IndexOutOfRangeException();
+        return backingArray[index];
     }
 
     public void Add(T newElement)
@@ -32,15 +32,26 @@ public class MyArrayList<T>
         if(lastIndex==size) {
             // resize your arraylist, copy over elements to new backing array 
             this.size = 2*this.size;
+            T[] newArray = new T[size];
+            for(int i = 0; i < backingArray.Length; i++)
+            {
+                newArray[i] = backingArray[i];
+            }
+            backingArray = newArray;
         }
         // add elements to backing array
+        backingArray[lastIndex] = newElement;
         Console.WriteLine("Adding element");
         lastIndex++;
     }
 
     public bool Find(T element2Find)
     {
-        throw new NotImplementedException();
+        foreach(T element in backingArray)
+        {
+            if(element.Equals(element2Find)) return true;
+        }
+        return false;
     }
 
     public int GetSize(){
@@ -48,6 +59,6 @@ public class MyArrayList<T>
     }
 
     public int GetCapacity(){
-        throw new NotImplementedException();
+        return lastIndex + 1;
     }
 }
